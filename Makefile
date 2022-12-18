@@ -48,6 +48,9 @@ test:
 clean:
 	rm -fr .pytest_cache
 
+install:
+	python -m pip install -r requirements.txt
+
 ###
 
 extract:

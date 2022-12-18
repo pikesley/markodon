@@ -2,6 +2,15 @@
 
 _Force your old tweets through a [Markov Chain](https://en.wikipedia.org/wiki/Markov_chain) like coffee through a civet_
 
+## Install this
+
+You'll need Python 3 (I built it with `3.10`)
+
+```
+git clone https://github.com/pikesley/markodon
+cd markodon
+make install
+```
 ## Prepare your tweets
 
 ### Download your Twitter archive
