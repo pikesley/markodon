@@ -1,0 +1,90 @@
+# Markodon
+
+_Force your old tweets through a [Markov Chain](https://en.wikipedia.org/wiki/Markov_chain) like coffee through a civet_
+
+## Prepare your tweets
+
+### Download your Twitter archive
+
+If that's still a thing by the time you're reading this
+
+### Prepare the data
+
+Unpack your archive
+
+```
+unzip twitter-datestamp-long-alphanumeric-string.zip
+cd data
+```
+
+Extract just the tweets from the JSON:
+
+```
+make extract
+```
+
+Copy the tweets to here:
+
+```
+cp /path/to/raw-tweets.txt .
+```
+
+Sanitise the tweets file:
+
+```
+make sanitise
+```
+
+This does the following to the archive:
+
+* Removes the enclosing quotes from each tweet
+* Removes all `@username` words
+* Removes all URLs
+* Removes embedded newlines
+* Unescape embedded double-quotes
+* Remove any truncated words from the end of a tweet
+* Replace HTML-encoded strings (`&amp;` etc) with their plain-text equivalents
+* Remove all `RT` tweets
+
+So now you have a cleaned, sanitised list of your tweets at `tweets.txt`.
+
+You could, at this point, delete `tweets.js` and `raw-tweets.txt` if you want.
+
+## Get set up
+
+You need to create a Mastodon application, with the `write` scope. Once you've done this, you just need `Your acccess token` (you can safely ignore all the Oauth stuff).
+
+You need the conf-file:
+
+```
+cp conf-example.yaml conf.yaml
+```
+
+And then fill in:
+
+* Your `server` URL (e.g. `https://mastoodn.me.uk`)
+* Your `token` from your application
+* Optionally, change the `min-toot-length`
+
+## Send a toot
+
+And now, to generate and send a toot,
+
+```
+make toot
+```
+
+## Hacking on it
+
+If you want to play with the (hastily-written over a weekend) code, there's a Docker image
+
+```
+make build
+make run
+```
+
+To run the tests:
+
+```
+make all
+```

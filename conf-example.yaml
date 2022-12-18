@@ -1,0 +1,3 @@
+server: https://mastodon.something
+token: some-API-token
+min-toot-length: 100
