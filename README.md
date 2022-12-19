@@ -4,13 +4,15 @@ _Force your old tweets through a [Markov Chain](https://en.wikipedia.org/wiki/Ma
 
 ## Install this
 
-You'll need Python 3 (I built it with `3.10`, but I now have it working with `3.8` elsewhere)
-
 ```
 git clone https://github.com/pikesley/markodon
 cd markodon
+export MARKODON=$(pwd)
 make install
 ```
+
+> You'll need Python 3 (I built it with `3.10`, but I now have it working with `3.8` elsewhere)
+
 ## Prepare your tweets
 
 ### Download your Twitter archive
@@ -19,23 +21,19 @@ If that's still a thing by the time you're reading this
 
 ### Prepare the data
 
-Unpack your archive
+Unpack your archive and copy the JSON to here:
 
 ```
-unzip twitter-datestamp-long-alphanumeric-string.zip
-cd data
+cd /tmp/
+unzip /path/to/twitter-datestamp-long-alphanumeric-string.zip
+cp data/tweets.js ${MARKODON}/
+cd ${MARKODON}/
 ```
 
 Extract just the tweets from the JSON:
 
 ```
 make extract
-```
-
-Copy the tweets to here:
-
-```
-cp /path/to/raw-tweets.txt .
 ```
 
 Sanitise the tweets file:
