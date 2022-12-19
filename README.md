@@ -11,7 +11,7 @@ export MARKODON=$(pwd)
 make install
 ```
 
-> You'll need Python 3 (I built it with `3.10`, but I now have it working with `3.8` elsewhere)
+You'll need Python 3 (I built it with `3.10`, but I now have it working with `3.8` elsewhere)
 
 ## Prepare your tweets
 
