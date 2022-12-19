@@ -1,3 +1,5 @@
-*tweets*
+tweets.js
+tweets.txt
+raw-tweets.txt
 .coverage
 conf.yaml
