@@ -131,4 +131,4 @@ def fix_file(in_file, out_file):
 
 
 if __name__ == "__main__":
-    fix_file("raw-tweets.txt", "tweets.txt")
+    fix_file("raw-tweets.txt", "tweets.txt")  # nocov
