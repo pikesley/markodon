@@ -1,20 +1,20 @@
 from pathlib import Path
 
 import yaml
-from markovchain.text import MarkovText
 from mastodon import Mastodon
 
-conf = yaml.safe_load(Path("conf.yaml").read_text())
-markov = MarkovText()
-s = Path("tweets.txt").read_text()
+from toot_maker import make_toot
 
-markov.data(s)
+conf = yaml.safe_load(Path("conf.yaml").read_text(encoding="utf-8"))
 
-toot = ""
-while len(toot) < conf["min-toot-length"]:
-    toot = markov(max_length=32)
 
-print(f"Tooting: {toot}")
+def send_toot(toot):
+    """Send a toot."""
+    mastodon = Mastodon(api_base_url=conf["server"], access_token=conf["token"])
 
-mastodon = Mastodon(api_base_url=conf["server"], access_token=conf["token"])
-mastodon.toot(toot)
+    print(f"Tooting: {toot}")
+    mastodon.toot(toot)
+
+
+if __name__ == "__main__":
+    send_toot(make_toot())

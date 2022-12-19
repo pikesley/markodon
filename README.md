@@ -72,7 +72,7 @@ And then fill in:
 
 * Your `server` URL (e.g. `https://mastoodn.me.uk`)
 * Your `token` from your application
-* Optionally, change the `min-toot-length`
+* Optionally, the `max-toot-length`
 
 ## Send a toot
 

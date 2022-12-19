@@ -59,5 +59,5 @@ extract:
 sanitise:
 	python sanitiser.py
 
-toot: # we redirect stderr because there's a deprecation warning I don't care about
-	python toot.py 2> /dev/null
+toot:  ## send a toot
+	python toot.py

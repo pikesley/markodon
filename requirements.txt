@@ -12,7 +12,7 @@ exceptiongroup==1.0.4
 idna==3.4
 iniconfig==1.1.1
 isort==5.11.3
-markovchain==0.2.6
+markovify==0.9.4
 Mastodon.py==1.8.0
 mypy-extensions==0.4.3
 packaging==22.0
