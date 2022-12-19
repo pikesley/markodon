@@ -61,6 +61,13 @@ run:  ## run the container (laptop only)
 
 ###
 
+ci:
+	docker run \
+		--tty \
+		--rm \
+		${ID} \
+		make
+
 # absolute voodoo from @rgarner
 help:  ## show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' ${MAKEFILE_LIST} | sed "s/.*:\(.*:.*\)/\1/" | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
