@@ -4,7 +4,7 @@ _Force your old tweets through a [Markov Chain](https://en.wikipedia.org/wiki/Ma
 
 ## Install this
 
-You'll need Python 3 (I built it with `3.10`, but I now have it working with `3.6` elsewhere)
+You'll need Python 3 (I built it with `3.10`, but I now have it working with `3.8` elsewhere)
 
 ```
 git clone https://github.com/pikesley/markodon
