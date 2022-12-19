@@ -57,8 +57,6 @@ This does the following to the archive:
 
 So now you have a cleaned, sanitised list of your tweets at `tweets.txt`.
 
-You could, at this point, delete `tweets.js` and `raw-tweets.txt` if you want.
-
 ## Get set up
 
 You need to create a Mastodon application, with the `write` scope. Once you've done this, you just need `Your acccess token` (you can safely ignore all the Oauth stuff)
