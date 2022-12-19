@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 
@@ -14,37 +15,32 @@ def unquote(line):
 
 def remove_users(line):
     """Remove @usernames."""
-    return remove_thing(line, "@")
-
-
-def nuke_urls(line):
-    """Remove URLs."""
-    return remove_thing(line, "http")
-
-
-def remove_thing(line, pattern):
-    """Remove token that starts with `pattern`."""
     not_tainted = []
     tokens = line.split(" ")
 
     for token in tokens:
-        if not token.startswith(pattern):
+        if not token.startswith("@"):
             not_tainted.append(token)
 
-    return " ".join(not_tainted)
+    return " ".join(not_tainted).strip()
 
 
-def no_newlines(line):
+def remove_urls(line):
+    """Remove URLs."""
+    return compress(re.sub(r"https?:\/\/[\S]*", "", line))
+
+
+def remove_newlines(line):
     """Remove embedded newlines."""
-    return line.replace("\\n", " ")
+    return compress(line.replace("\\n", " "))
 
 
 def unescape_embedded_quotes(line):
     """Remove embedded quotes."""
-    return line.replace('\\"', '"')
+    return compress(line.replace('\\"', '"'))
 
 
-def detruncate(line):
+def remove_truncation(line):
     """Remove truncated words."""
     tokens = line.split(" ")
     if tokens[-1].endswith("…"):
@@ -53,7 +49,7 @@ def detruncate(line):
     return " ".join(tokens)
 
 
-def excise_rts(line):
+def remove_rts(line):
     """Remove `RT`."""
     if line.startswith("RT"):
         return None
@@ -61,34 +57,77 @@ def excise_rts(line):
     return line
 
 
-def fix_encodeds(line):
+def fix_encodings(line):
     """Replace `&amp;` etc."""
     encodings = {"&amp;": "&", "&lt;": "<", "&gt;": ">"}
 
     for encoded, plain in encodings.items():
         line = line.replace(encoded, plain)
 
+    return compress(line)
+
+
+def remove_wordle(line):
+    """Remove `Wordle` tweets."""
+    if line.startswith("Wordle "):
+        return None
+
     return line
+
+
+def remove_embedded_quotes_and_friends(line):
+    """Safely nuke embedded quotes."""
+    tokens = line.split(" ")
+    unquoted = []
+    quotes_and_ting = ['"', "'", "`", "“", "”", "‘", "’", "*", "_"]
+    closing_punctuation = ["?", "!", ",", ".", ":"]
+
+    for token in tokens:
+        for symbol in quotes_and_ting:
+            if token.startswith(symbol):
+                token = token[1:]
+            if token.endswith(symbol):
+                token = token[:-1]
+
+            token = re.sub(
+                rf"(.*)\{symbol}([{''.join(closing_punctuation)}])", "\\1\\2", token
+            )
+
+        unquoted.append(token)
+
+    return compress(" ".join(unquoted))
+
+
+def compress(line):
+    """Nuke multiple spaces."""
+    return re.sub(r"\s{2,}", " ", line).strip()
 
 
 def fix_file(in_file, out_file):
     """Fixup a whole file."""
-    lines = Path(in_file).read_text().split("\n")
+    lines = Path(in_file).read_text(encoding="utf-8").split("\n")
     clean_lines = []
     for line in lines:
-        line = unquote(line)
-        line = remove_users(line)
-        line = nuke_urls(line)
-        line = no_newlines(line)
-        line = unescape_embedded_quotes(line)
-        line = detruncate(line)
-        line = fix_encodeds(line)
-        line = excise_rts(line)
+
+        for method in [
+            "unquote",
+            "unescape_embedded_quotes",
+            "remove_newlines",
+            "remove_embedded_quotes_and_friends",
+            "remove_rts",
+            "remove_wordle",
+            "remove_users",
+            "remove_urls",
+            "remove_truncation",
+            "fix_encodings",
+        ]:
+            if line:
+                line = globals()[method](line)
 
         if line:
             clean_lines.append(line)
 
-    Path(out_file).write_text("\n".join(clean_lines) + "\n")
+    Path(out_file).write_text("\n".join(clean_lines) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

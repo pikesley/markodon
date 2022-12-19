@@ -47,13 +47,14 @@ make sanitise
 This does the following to the archive:
 
 * Removes the enclosing quotes from each tweet
+* Removes embedded newlines
+* Removes embedded quotes and so on (`'`, `"`, `*` etc)
+* Removes all `RT` tweets
+* Removes all `wordle` tweets
 * Removes all `@username` words
 * Removes all URLs
-* Removes embedded newlines
-* Unescape embedded double-quotes
-* Remove any truncated words from the end of a tweet
-* Replace HTML-encoded strings (`&amp;` etc) with their plain-text equivalents
-* Remove all `RT` tweets
+* Removes any truncated words from the end of a tweet
+* Replaces HTML-encoded strings (`&amp;` etc) with their plain-text equivalents
 
 So now you have a cleaned, sanitised list of your tweets at `tweets.txt`.
 
