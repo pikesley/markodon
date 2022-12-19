@@ -107,7 +107,7 @@ def test_remove_embedded_quotes_and_friends():
 
 def test_fix_file():
     """Test fixing a whole file."""
-    fix_file("tests/fixtures/tweets.txt", "/tmp/tweets.txt")
+    fix_file("tests/fixtures/messy-tweets.txt", "/tmp/tweets.txt")
 
     actual = Path("/tmp/tweets.txt").read_text(encoding="utf-8")
     expected = Path("tests/fixtures/cleaned-tweets.txt").read_text(encoding="utf-8")
