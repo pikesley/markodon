@@ -2,6 +2,8 @@
 
 _Force your old tweets through a [Markov Chain](https://en.wikipedia.org/wiki/Markov_chain) like coffee through a civet_
 
+It's [spouting nonsense on Mastodon](https://mastodon.me.uk/@pikesley_ebooks) as you read this
+
 ## Install this
 
 ```
