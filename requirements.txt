@@ -25,7 +25,7 @@ pycodestyle==2.10.0
 pydocstyle==6.3.0
 pyflakes==3.0.1
 pylama==8.4.1
-pylint==2.15.9
+pylint==2.16.3
 pytest==7.2.1
 pytest-cov==4.0.0
 pytest-cover==3.0.0
