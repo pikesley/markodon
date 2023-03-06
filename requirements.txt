@@ -12,7 +12,7 @@ exceptiongroup==1.1.0
 idna==3.4
 iniconfig==1.1.1
 isort==5.11.4
-lazy-object-proxy==1.8.0
+lazy-object-proxy==1.9.0
 markovify==0.9.4
 Mastodon.py==1.8.0
 mccabe==0.7.0
