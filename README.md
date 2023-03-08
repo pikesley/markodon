@@ -70,7 +70,7 @@ cp conf-example.yaml conf.yaml
 
 And then fill in:
 
-* Your `server` URL (e.g. `https://mastoodn.me.uk`)
+* Your `server` URL (e.g. `https://mastodon.me.uk`)
 * Your `token` from your application
 * Optionally, the `max-toot-length`
 
