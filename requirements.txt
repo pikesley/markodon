@@ -27,7 +27,7 @@ pyflakes==3.1.0
 pylama==8.4.1
 pylint==2.15.9
 pytest==7.2.2
-pytest-cov==4.0.0
+pytest-cov==4.1.0
 pytest-cover==3.0.0
 pytest-coverage==0.0
 pytest-random-order==1.1.0
