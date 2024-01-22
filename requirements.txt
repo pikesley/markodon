@@ -1,4 +1,4 @@
-astroid==2.12.13
+astroid==3.0.2
 attrs==23.1.0
 black==23.12.1
 blurhash==1.1.4
